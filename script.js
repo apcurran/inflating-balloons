@@ -70,8 +70,12 @@ const anim = (() => {
 
     
     let circleArr = [];
+    let totalBalloons = 1000;
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        totalBalloons = 500;
+    }
     
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < totalBalloons; i++) {
         let radius = (Math.random() * 10) + 1;
         const diameter = radius * 2;
         let x = Math.random() * (canvasEl.width - diameter) + radius;
