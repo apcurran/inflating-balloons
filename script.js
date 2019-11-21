@@ -4,7 +4,7 @@ const anim = (() => {
     const canvasEl = document.getElementById("canvas");
     canvasEl.width = document.documentElement.clientWidth;
     canvasEl.height = document.documentElement.clientHeight;
-    const ctx = canvasEl.getContext("2d");
+    const ctx = canvasEl.getContext("2d", { alpha: false });
 
     let mouse = {
         x: null,
@@ -88,8 +88,8 @@ const anim = (() => {
     
     (function animate() {
         requestAnimationFrame(animate);
-        
-        ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
+        ctx.fillStyle = "#fff"; // White bg clr
+        ctx.fillRect(0, 0, canvasEl.width, canvasEl.height);
         
         for (let i = 0; i < circleArr.length; i++) {
             circleArr[i].update();
