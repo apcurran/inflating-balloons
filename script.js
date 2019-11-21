@@ -6,6 +6,25 @@ const anim = (() => {
     canvasEl.height = document.documentElement.clientHeight;
     const ctx = canvasEl.getContext("2d");
 
+    let mouse = {
+        x: null,
+        y: null
+    };
+
+    const maxRadius = 50;
+    const colorArr = [
+        "#035AA6",
+        "#0477BF",
+        "#DCEAF2",
+        "#048ABF",
+        "#04B2D9"
+    ]
+
+    window.addEventListener("mousemove", (event) => {
+        mouse.x = event.x;
+        mouse.y = event.y;
+    });
+
     class Circle {
         constructor(x, y, dx, dy, radius) {
             this.x = x;
@@ -13,13 +32,15 @@ const anim = (() => {
             this.dx = dx;
             this.dy = dy;
             this.radius = radius;
+            this.minRadius = radius;
+            this.color = colorArr[Math.floor(Math.random() * colorArr.length)];
         }
 
         draw() {
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-            ctx.strokeStyle = "purple";
-            ctx.stroke();
+            ctx.fillStyle = this.color;
+            ctx.fill();
         }
 
         update() {
@@ -35,14 +56,23 @@ const anim = (() => {
             this.y += this.dy;
 
             this.draw();
+
+            // Hover effect
+            if (mouse.x - this.x < 50 && mouse.x - this.x > -50 && mouse.y - this.y < 50 && mouse.y - this.y > -50) {
+                if (this.radius < maxRadius) {
+                    this.radius += 1;
+                }
+            } else if (this.radius > this.minRadius) {
+                this.radius -= 1;
+            }
         }
     }
 
     
     let circleArr = [];
     
-    for (let i = 0; i < 100; i++) {
-        const radius = 30;
+    for (let i = 0; i < 1000; i++) {
+        let radius = (Math.random() * 10) + 1;
         const diameter = radius * 2;
         let x = Math.random() * (canvasEl.width - diameter) + radius;
         let y = Math.random() * (canvasEl.height - diameter) + radius;
