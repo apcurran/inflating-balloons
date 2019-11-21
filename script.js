@@ -71,8 +71,8 @@ const anim = (() => {
     
     let circleArr = [];
     let totalBalloons = 1000;
-    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-        totalBalloons = 50;
+    if (window.matchMedia("only screen and (max-width: 550px)").matches) {
+        totalBalloons = 300;
     }
     
     for (let i = 0; i < totalBalloons; i++) {
