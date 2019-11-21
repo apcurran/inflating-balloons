@@ -72,7 +72,7 @@ const anim = (() => {
     let circleArr = [];
     let totalBalloons = 1000;
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-        totalBalloons = 150;
+        totalBalloons = 50;
     }
     
     for (let i = 0; i < totalBalloons; i++) {
